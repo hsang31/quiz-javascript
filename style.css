@@ -1,0 +1,252 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-2: #22263a;
+    --accent: #7c6fff;
+    --accent-dim: rgba(124, 111, 255, 0.12);
+    --green: #4ade80;
+    --green-dim: rgba(74, 222, 128, 0.12);
+    --red: #f87171;
+    --red-dim: rgba(248, 113, 113, 0.12);
+    --text: #e8e8f0;
+    --muted: #6b7280;
+    --border: rgba(255, 255, 255, 0.07);
+    --radius: 10px;
+    --font: 'JetBrains Mono', 'Fira Mono', monospace;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* PANTALLAS */
+.pantalla {
+    display: none;
+    flex-direction: column;
+}
+
+.pantalla.activo {
+    display: flex;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* CONTENEDOR PRINCIPAL */
+#app {
+    width: 100%;
+    max-width: 560px;
+    min-height: 480px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* PANTALLA INICIO */
+#pantalla-inicio {
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    justify-content: center;
+    flex: 1;
+}
+
+#pantalla-inicio h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+}
+
+#pantalla-inicio p {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+#pantalla-quiz {
+    gap: 1rem
+}
+
+/* BOTONES PRINCIPALES */
+button {
+    font-family: var(--font);
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+}
+
+#btn-iniciar,
+#btn-reiniciar {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    letter-spacing: 0.5px;
+}
+
+#btn-iniciar:hover,
+#btn-reiniciar:hover {
+    background: #9d90ff;
+    transform: translateY(-1px);
+}
+
+/* BARRA SUPERIOR */
+#barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+#puntaje {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* TIMER */
+#timer-contenedor {
+    width: 100%;
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+#timer-barra {
+    height: 100%;
+    width: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 1s linear, background 0.3s ease;
+}
+
+#timer-barra.urgente {
+    background: var(--red);
+}
+
+#timer-numero {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: right;
+    display: block;
+    margin-top: -1rem;
+}
+
+/* PREGUNTA */
+#texto-pregunta {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text);
+    min-height: 60px;
+}
+
+/* OPCIONES */
+#opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.opcion {
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.opcion:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    color: #fff;
+}
+
+.opcion:disabled {
+    cursor: default;
+}
+
+.opcion.correcta {
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.opcion.incorrecta {
+    background: var(--red-dim);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* FEEDBACK */
+#feedback {
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--muted);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* PANTALLA RESULTADOS */
+#pantalla-resultados {
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    justify-content: center;
+    flex: 1;
+}
+
+#pantalla-resultados h2 {
+    font-size: 1.2rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+#puntaje-final {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -2px;
+}
+
+#mensaje-final {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
